@@ -47,8 +47,11 @@ public partial class EmployeesDbContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmpId).HasName("PK_Employees_1");
+            entity.HasKey(e => e.EmpId).HasName("PK_Employees_EmpId");
 
+            entity.Property(e => e.EmpId)
+                .HasMaxLength(4)
+                .IsUnicode(false);
             entity.Property(e => e.Department)
                 .HasMaxLength(100)
                 .IsUnicode(false);
