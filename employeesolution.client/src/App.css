@@ -1,0 +1,46 @@
+﻿.table_section {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .table_section th,
+    .table_section td {
+        border: 1px solid #ddd;
+        padding: 12px 16px;
+        text-align: left;
+    }
+
+    .table_section th {
+        background-color: #0077cc;
+        color: white;
+    }
+
+    .table_section tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table_section tr:hover {
+        background-color: #e6f7ff;
+        cursor: pointer;
+    }
+
+div {
+    padding: 20px;
+}
+
+
+.button_section {
+    background-color: #0077cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}

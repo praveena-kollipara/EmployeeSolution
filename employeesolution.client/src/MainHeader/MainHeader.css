@@ -1,0 +1,22 @@
+.MainHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 80px;
+    border: 3px solid blue;
+    color: red;
+}
+
+    /* Image stays at the start */
+    .MainHeader img {
+        flex-shrink: 0;
+    }
+
+/* Text is centered absolutely */
+.header-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 24px;
+}

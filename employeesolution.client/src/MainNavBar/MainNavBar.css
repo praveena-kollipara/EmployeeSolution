@@ -1,0 +1,29 @@
+/* MainNavBar.css */
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* This makes the <li> items (and NavLink inside) display horizontally */
+    background-color: #333;
+}
+
+li {
+    margin: 0;
+}
+
+a {
+    display: block;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    a:hover {
+        background-color: #575757;
+    }
+
+.active-link {
+    background-color: #04AA6D; /* Active page link color */
+}
