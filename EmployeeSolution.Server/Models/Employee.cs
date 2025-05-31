@@ -17,5 +17,5 @@ public partial class Employee
 
     public string? Status { get; set; }
 
-    public int Id { get; set; }
+    public int EmpId { get; set; }
 }

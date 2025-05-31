@@ -15,9 +15,11 @@ public partial class EmployeesDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Course> Courses { get; set; }
+
     public virtual DbSet<Employee> Employees { get; set; }
 
-    public virtual DbSet<Performance> Performances { get; set; }
+    public virtual DbSet<EmployeeCourse> EmployeeCourses { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -25,9 +27,27 @@ public partial class EmployeesDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Course>(entity =>
+        {
+            entity.Property(e => e.CourseId)
+                .HasMaxLength(4)
+                .IsUnicode(false)
+                .HasColumnName("courseId");
+            entity.Property(e => e.CourseName)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("courseName");
+            entity.Property(e => e.CoursesStatus)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("coursesStatus");
+            entity.Property(e => e.Enddate).HasColumnName("enddate");
+            entity.Property(e => e.Startdate).HasColumnName("startdate");
+        });
+
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK_Employees_1");
+            entity.HasKey(e => e.EmpId).HasName("PK_Employees_1");
 
             entity.Property(e => e.Department)
                 .HasMaxLength(100)
@@ -41,11 +61,24 @@ public partial class EmployeesDbContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Performance>(entity =>
+        modelBuilder.Entity<EmployeeCourse>(entity =>
         {
-            entity.ToTable("Performance");
+            entity
+                .HasNoKey()
+                .ToTable("employeeCourses");
 
-            entity.Property(e => e.PerformanceId).ValueGeneratedNever();
+            entity.Property(e => e.CourseId)
+                .HasMaxLength(4)
+                .IsUnicode(false)
+                .HasColumnName("courseId");
+            entity.Property(e => e.CourseName)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("courseName");
+            entity.Property(e => e.CourseStatus)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("courseStatus");
         });
 
         OnModelCreatingPartial(modelBuilder);
