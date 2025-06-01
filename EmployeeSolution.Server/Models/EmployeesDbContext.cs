@@ -66,9 +66,9 @@ public partial class EmployeesDbContext : DbContext
 
         modelBuilder.Entity<EmployeeCourse>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("employeeCourses");
+            entity.HasKey(e => e.Id).HasName("PK__employee__3214EC07DD3F1AC7");
+
+            entity.ToTable("employeeCourses");
 
             entity.Property(e => e.CourseId)
                 .HasMaxLength(4)
@@ -82,7 +82,12 @@ public partial class EmployeesDbContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("courseStatus");
+            entity.Property(e => e.EmpId)
+                .HasMaxLength(4)
+                .IsUnicode(false);
         });
+
+
 
         OnModelCreatingPartial(modelBuilder);
     }
