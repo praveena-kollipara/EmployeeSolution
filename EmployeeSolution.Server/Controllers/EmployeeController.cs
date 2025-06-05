@@ -70,5 +70,16 @@ namespace EmployeeSolution.Server.Controllers
             await _dbcontext.SaveChangesAsync();
             return Ok(employee);
         }
+
+        [HttpGet("getbydept/{dept}")]  //- getbydept/dev
+           // getbydept?dept=dev&status=active
+        public async Task<IActionResult> getbydepartment(string dept)
+        {
+            var empdepts =await _dbcontext.Employees.Where(emp =>emp.Department == dept).ToListAsync();
+            return Ok(empdepts);
+        }
+
+
+
     }
 }
