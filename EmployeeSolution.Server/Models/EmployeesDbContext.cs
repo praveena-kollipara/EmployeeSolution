@@ -45,6 +45,7 @@ public partial class EmployeesDbContext : DbContext
             entity.Property(e => e.Startdate).HasColumnName("startdate");
         });
 
+        
         modelBuilder.Entity<Employee>(entity =>
         {
             entity.HasKey(e => e.EmpId).HasName("PK_Employees_EmpId");
@@ -55,6 +56,7 @@ public partial class EmployeesDbContext : DbContext
             entity.Property(e => e.Department)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.Hike).HasColumnType("decimal(5, 2)");
             entity.Property(e => e.Position)
                 .HasMaxLength(100)
                 .IsUnicode(false);

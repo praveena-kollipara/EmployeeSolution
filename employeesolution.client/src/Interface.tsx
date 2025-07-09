@@ -6,5 +6,14 @@ export interface IEMP {
     position: string
     department: string
     status: string
-    id: number
+    empId: string
+    
+}
+
+export interface ICourses {
+    courseId: string
+    courseName: string
+    coursesStatus: string
+    startdate: string
+    enddate: string
 }

@@ -22,7 +22,8 @@ namespace EmployeeSolution.Server.Controllers
         {
             var AllEmp = await _dbcontext.Employees.ToListAsync();
             return Ok(AllEmp);
-
+            //salry -> salary in db,hike->hike
+            //when calling this get api -> I want salary column to be salary+hike
         }
 
         [HttpGet("{Id}")]

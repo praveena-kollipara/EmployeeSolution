@@ -20,6 +20,15 @@ namespace EmployeeSolution.Server.Controllers
             return Ok(records);
         }
 
+        [HttpGet("getbyemid/courses/empid")]
+        public async Task<IActionResult> GetById ([FromQuery] string empid)
+        {
+            var empcourses = await _context.EmployeeCourses.Where(x => x.EmpId == empid).Select(x => x.CourseId).ToListAsync();
+            var courseinfo = await _context.Courses.Where(x => empcourses.Contains(x.CourseId)).ToListAsync();
+            return Ok(courseinfo);
+
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] EmployeeCourse item)
         {

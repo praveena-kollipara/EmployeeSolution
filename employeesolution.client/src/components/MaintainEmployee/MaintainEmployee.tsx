@@ -35,13 +35,15 @@ const MaintainEmployee: React.FC = () => {
             <h3 style={{ display: "flex", alignItems: "center", justifyContent:"center" }}>Edit/Delete Employee </h3>
             <table className="table_section">
                 <thead>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Salary</th>
-                    <th>Position</th>
-                    <th>Department</th>
-                    <th>Status</th>
-                    <th>Options</th>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Salary</th>
+                        <th>Position</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {data.map((emp) => (

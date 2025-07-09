@@ -8,14 +8,16 @@ import MaintainEmployee from './components/MaintainEmployee/MaintainEmployee';
 
 
 
+
 function App() {
+   
     return (
         <div>
             
             <MainHeader />
             <MainNavBar />
             <Routes>
-                <Route path="/Home" element={<EmployeeInfo />} />
+                <Route path="/Home" element={<EmployeeInfo  />} />
                 <Route path="/AddEmployee" element={<AddEmployee />} />
                 <Route path="/UpdateEmployee" element={<MaintainEmployee />} />
             </Routes>

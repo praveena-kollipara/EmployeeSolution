@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EmployeeSolution.Server.Models;
 
-public partial class Employee
+public partial class EmployeeDTO
 {
     public string Name { get; set; } = null!;
 
@@ -20,4 +20,6 @@ public partial class Employee
     public string EmpId { get; set; } = null!;
 
     public decimal? Hike { get; set; }
+
+    public decimal? SalaryHike { get; set; }
 }

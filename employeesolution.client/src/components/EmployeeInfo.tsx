@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import { IEMP } from "../Interface"
 import axios from "axios";
 import "../App.css"
+import '../App'
+import EmployeeCourses from "./EmployeeCourses";
 
 const EmployeeInfo: React.FC = () => {
     const [allemployees, setAllEmployees] = useState<IEMP[]>([]);
     const [employees, setEmployees] = useState<IEMP[]>([]);
     const [isOnlyActive, setIsOnlyActive] = useState<boolean>(false);
     const [selectedDept, setSelectedDept] = useState('');
+    //const [isOpenCourseModal, setIsOpenCourseModal] = useState(false);
+    //const [courseInfo, setCourseInfo] = useState<ICourses[]>([]);
+    const [selectedId, setSelectedId] = useState('');
     const handleFilterEmp = () => {
         
         setIsOnlyActive(!isOnlyActive);
@@ -56,7 +61,26 @@ const EmployeeInfo: React.FC = () => {
 
     //var name = "praveena";
     //getMyName(name);
+    //useEffect(() => {
+    //    if (selectedId) {
+    //        //fetchCourses();
+    //    }
 
+    //}, [selectedId])
+    //const handleEmpCourse = (Id: string) => {
+    //    setSelectedId(Id);
+    //    setIsOpenCourseModal(true);
+    //    fetchCourses(Id);
+    //}
+    //const fetchCourses = async (id:string) => {
+    //    try {
+    //        const response = await axios.get(`https://localhost:7190/EmployeeCourse/getbyemid/courses/empid?empid=${id}`);
+    //        setCourseInfo(response.data);
+    //    }
+    //    catch (err) {
+    //        console.log(err);
+    //    }
+    //}
 
     return (
         <div>
@@ -80,7 +104,8 @@ const EmployeeInfo: React.FC = () => {
                 </thead>
                 <tbody>
                     {(isOnlyActive ? employees : FilterEmp).map((emp) => (
-                        <tr key={emp.id} >
+                        <tr key={emp.empId} onClick={()=>setSelectedId(emp.empId)} >
+                            <td>{emp.empId}</td>
                             <td>{emp.name}</td>
                             <td>{emp.email}</td>
                             <td>{emp.position}</td>
@@ -90,6 +115,36 @@ const EmployeeInfo: React.FC = () => {
                     ))}
                 </tbody>
             </table>
+            {selectedId && (
+                <div>
+                    <EmployeeCourses EmpId={selectedId}></EmployeeCourses>    
+                </div>
+            ) }
+            {/*{isOpenCourseModal && (*/}
+            {/*    <div>*/}
+            {/*        <h3>Enrolled Courses: </h3>*/}
+            {/*        <table>*/}
+            {/*            <thead>*/}
+            {/*                <tr>*/}
+            {/*                    <th>Course</th>*/}
+            {/*                    <th>StartDate</th>*/}
+            {/*                    <th>EndDate</th>*/}
+            {/*                    <th>CourseStatus</th>*/}
+            {/*                </tr>*/}
+            {/*            </thead>*/}
+            {/*            <tbody>*/}
+            {/*                {courseInfo.map((item) => (*/}
+            {/*                    <tr key={item.courseId}>*/}
+            {/*                        <td>{item.courseName}</td>*/}
+            {/*                        <td>{item.startdate}</td>*/}
+            {/*                        <td>{item.enddate}</td>*/}
+            {/*                        <td>{item.enddate}</td>*/}
+            {/*                    </tr>  */}
+            {/*                ))}*/}
+            {/*            </tbody>*/}
+            {/*        </table>*/}
+            {/*    </div>*/}
+            {/*)}*/}
         </div>
     );
 }
