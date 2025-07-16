@@ -20,7 +20,20 @@ namespace EmployeeSolution.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var AllEmp = await _dbcontext.Employees.ToListAsync();
+            var AllEmp = await _dbcontext.Employees.Select(x=>
+                new EmployeeDTO
+                {
+                    Name = x.Name,
+                    Email = x.Email,
+                    Salary = x.Salary,
+                    Position = x.Position,
+                    Department = x.Department,
+                    Status = x.Status,
+                    EmpId = x.EmpId,
+                    Hike=x.Hike,
+                    SalaryHike =x.Salary +( x.Salary * (x.Hike/100))
+                }
+            ). ToListAsync();
             return Ok(AllEmp);
             //salry -> salary in db,hike->hike
             //when calling this get api -> I want salary column to be salary+hike

@@ -1,12 +1,14 @@
 export interface IEMP {
    
-    name: string
-    email: string
-    salary: number
-    position: string
-    department: string
-    status: string
-    empId: string
+    name: string;
+    email: string;
+    salary: number;
+    position: string;
+    department: string;
+    status: string;
+    empId: string;
+    hike: number;
+    salaryHike: number;
     
 }
 
