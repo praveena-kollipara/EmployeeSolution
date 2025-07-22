@@ -5,6 +5,7 @@ import MainNavBar from "./MainNavBar/MainNavBar"
 import MainHeader from './MainHeader/MainHeader';
 import AddEmployee from './components/AddEmployee/AddEmployee';
 import MaintainEmployee from './components/MaintainEmployee/MaintainEmployee';
+import MaintainCourse from './components/MaintainCourses/MaintainCourse';
 
 
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/Home" element={<EmployeeInfo  />} />
                 <Route path="/AddEmployee" element={<AddEmployee />} />
                 <Route path="/UpdateEmployee" element={<MaintainEmployee />} />
+                <Route path="MaintainCourse" element={<MaintainCourse/> }/>
             </Routes>
             
         </div>

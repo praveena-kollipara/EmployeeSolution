@@ -63,7 +63,7 @@ namespace EmployeeSolution.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Employee data,  int id)
+        public async Task<IActionResult> Put([FromBody] Employee data,  string id)
         {
             if (data == null)
             {

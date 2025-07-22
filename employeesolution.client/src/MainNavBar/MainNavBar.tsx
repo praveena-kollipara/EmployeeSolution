@@ -22,6 +22,11 @@ const MainNavBar: React.FC = () => {
                     <NavLink to="/UpdateEmployee" className={({ isActive }) => isActive ? "active-link" : undefined}>
                         Update Employee</NavLink>
                 </li>
+
+                <li>
+                    <NavLink to="/MaintainCourse" className={({ isActive }) => isActive ? "active-link" : undefined}>
+                        Maintain Course</NavLink>
+                </li>
                        
             </ul>
         </nav>

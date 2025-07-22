@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="src\components\AddEmployee\" />
     <Folder Include="src\components\MaintainEmployee\" />
+    <Folder Include="src\components\MaintainCourses\" />
     <Folder Include="src\MainHeader\" />
   </ItemGroup>
 </Project>

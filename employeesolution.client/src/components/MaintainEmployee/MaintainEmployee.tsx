@@ -8,9 +8,20 @@ import "../../index.css"
 const MaintainEmployee: React.FC = () => {
     const [data, setData] = useState<IEMP[]>([]);
     const [openEditModal, setOpenEditModal] = useState(false);
-    const [selectedEditRecord, setSelectedEditRecord] = useState<IEMP | null>(null);
+    const [selectedEditRecord, setSelectedEditRecord] = useState<IEMP>({
+        name: '',
+        email: '',
+        salary: 0,
+        position: '',
+        department: '',
+        status: '',
+        empId: '',
+        hike: 0,
+        salaryHike: 0
+    });
     const [query, setQuery] = useState('');
     const [filteredData, setFilterData] = useState<IEMP[]>([]);
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
     const handleUpdateModal = (record: IEMP) => {
         setSelectedEditRecord(record)
@@ -33,12 +44,12 @@ const MaintainEmployee: React.FC = () => {
     }
 
     const handleEditInput = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        if (!selectedEditRecord)
-            return;
+        
         const { name, value } = e.target
         setSelectedEditRecord((prev) => (
-            { ...prev!, [name]: value }
+            { ...prev, [name]: value }
         ))
+        console.log(selectedEditRecord);
     }
     const handleSearch = () => {
         setFilterData(
@@ -49,6 +60,37 @@ const MaintainEmployee: React.FC = () => {
                 item.status.toLowerCase() === query.toLowerCase()
         )
         ))    
+    }
+    const AddNewRecord = async () => {
+        const id = selectedEditRecord.empId;
+        try {
+            const response = await axios.put(`https://localhost:7190/api/Employee/${id}`, selectedEditRecord);
+            const updatedEmployee = response.data;
+            setSelectedEditRecord(updatedEmployee);
+            setData((prev) => (
+                prev.map((emp)=> (
+                    emp.empId === updatedEmployee.empId ? updatedEmployee : emp
+                ))
+            ));
+            setSelectedEditRecord({
+                name: '',
+                email: '',
+                salary: 0,
+                position: '',
+                department: '',
+                status: '',
+                empId: '',
+                hike: 0,
+                salaryHike: 0
+            })
+            setOpenEditModal(false);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    const handleDelete = (id: string) => {
+        setOpenDeleteModal(true);
     }
     return (
         <div>
@@ -85,14 +127,14 @@ const MaintainEmployee: React.FC = () => {
                             <td>{emp.status}</td>
                             <td>
                                 <FontAwesomeIcon onClick={() => { handleUpdateModal(emp) }} icon={faEdit} style={{ marginRight: "10px" }} />
-                                <FontAwesomeIcon icon={faTrash} />
+                                <FontAwesomeIcon onClick={() => { handleDelete(emp.empId) }} icon={faTrash} />
                             </td>
                         </tr>
                     
                     ))}
                 </tbody>
             </table>
-            {openEditModal && selectedEditRecord && (
+            {openEditModal && (
                 <div className="modal-overlay">
                     <div className="modal-container">
                         <h3>Edit Employee</h3>
@@ -140,12 +182,22 @@ const MaintainEmployee: React.FC = () => {
                             </div>
                         </div>
                         <div className="button_container">
-                            <button className="button_section">Save</button>
+                            <button className="button_section" onClick={AddNewRecord } >Save</button>
                             <button className="button_section" onClick={() => setOpenEditModal(false)}>Cancel</button>
                         </div>
                     </div>
+
                 </div>
             )}
+            {openDeleteModal && (
+                <div>
+                    <p>Are you sure want to delete this record</p>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <button>Yes</button>
+                        <button>No</button>
+                    </div>
+                </div>
+            ) }
 
         </div>
     );
